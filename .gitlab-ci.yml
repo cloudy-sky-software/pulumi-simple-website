@@ -5,7 +5,8 @@ environment:
   stage: infrastructure-update
   script:
     - export
-  
+  only:
+    - merge_requests
 
 pulumi:
   stage: infrastructure-update
