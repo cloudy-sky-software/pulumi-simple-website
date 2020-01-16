@@ -23,7 +23,5 @@ pulumi-preview:
     - ./scripts/setup.sh
   script:
     - ./scripts/pulumi-preview.sh
-  when: manual
-  except:
-    refs:
-      - master
+  only:
+    - merge_requests

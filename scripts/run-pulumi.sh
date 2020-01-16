@@ -8,6 +8,5 @@ export PATH=$PATH:$HOME/.pulumi/bin
 
 yarn install
 
-pulumi stack select praneetloke/s3
-pulumi config set aws:region us-west-2
+pulumi stack select praneetloke/simple-website/dev
 pulumi up --yes
