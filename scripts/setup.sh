@@ -7,7 +7,7 @@ set -e -x
 curl -L https://get.pulumi.com/ | bash
 export PATH=$PATH:$HOME/.pulumi/bin
 # Login into pulumi. This will require the PULUMI_ACCESS_TOKEN environment variable
-pulumi login
+pulumi login -c "$PULUMI_API"
 # update the GitLab Runner's packages
 apt-get update -y
 apt-get install sudo -y
