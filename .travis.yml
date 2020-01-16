@@ -1,0 +1,14 @@
+language: node_js
+branches:
+  only:
+  - master
+dist: xenial
+install:
+    # Install Pulumi
+    - curl -fsSL https://get.pulumi.com/ | bash
+    - export PATH="$HOME/.pulumi/bin:$PATH"
+before_script:
+    - chmod +x ./scripts/*.sh
+    - ./scripts/setup.sh
+script:
+    - ./scripts/pulumi-preview.sh
