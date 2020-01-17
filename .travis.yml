@@ -21,4 +21,6 @@ jobs:
       if: type = pull_request
     - stage: pulumi-up
       script: echo "I will run for master branches only!"
+      # Uncomment the below line to actually deploy the website app.
+      #script: ./scripts/run-pulumi.sh
       if: type = push
