@@ -30,6 +30,9 @@ jobs:
       - run:
           name: Mark scripts as executable
           command: |
+            ls -lrt
+            ls -lrt ~/project
+            ls -lrt ~/pulumi-simple-website
             chmod +x ./scripts/*.sh
             ./scripts/setup.sh
 
