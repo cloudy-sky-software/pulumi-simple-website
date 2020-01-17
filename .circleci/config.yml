@@ -31,12 +31,10 @@ jobs:
           command: chmod +x ./scripts/*.sh
 
   pulumi_preview:
-    steps:
       run:
         name: Run pulumi preview
         command: ./scripts/pulumi-preview.sh
   pulumi_up:
-    steps:
       run:
         name: Run pulumi up
         command: |
