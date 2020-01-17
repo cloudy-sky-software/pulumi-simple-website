@@ -18,7 +18,7 @@ jobs:
   include:
     - stage: pulumi-preview
       script: ./scripts/pulumi-preview.sh
-      if: branch != master
+      if: type = pull_request
     - stage: pulumi-up
       script: echo "I will run for master branches only!"
-      if: branch = master
+      if: type = push
