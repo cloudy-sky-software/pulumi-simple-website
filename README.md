@@ -76,3 +76,18 @@ with `***`.
     ![Hello S3 example](images/part2-website.png)
 
 1.  To clean up resources, run `pulumi destroy` and answer the confirmation question at the prompt.
+
+## CI configuration
+
+This project contains sample configuration for the following CI systems:
+* GitLab
+* Travis CI
+* CircleCI (uses the official [Pulumi Orb](https://circleci.com/orbs/registry/orb/pulumi/pulumi))
+
+In each of the configuration files, the setup is the following:
+* Install Pulumi CLI
+* Run yarn install
+* Run `pulumi preview` for pull request builds
+* Run `pulumi up` for master branch merge builds
+  * This is currently commented out in each of the configurations and instead a message will be printed.
+  * Simply remove the `echo` message and instead uncomment the line that runs the `pulumi up` command.
