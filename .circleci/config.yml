@@ -47,16 +47,19 @@ jobs:
 workflows:
   version: 2
   preview:
-    when: << pipeline.git.branch >> != "master"
     jobs:
       - build
       - pulumi_preview:
           requires:
             - build
-  update:
-    when: << pipeline.git.branch >> == "master"
-    jobs:
-      - build
-      - pulumi_up:
+          filters:
+            branches:
+              ignore:
+                - master
+      - pulumi_up
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - master
