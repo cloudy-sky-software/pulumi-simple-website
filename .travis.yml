@@ -12,7 +12,8 @@ install:
   - export PATH="$HOME/.pulumi/bin:$PATH"
 before_script:
   - chmod +x ./scripts/*.sh
-  - ./scripts/setup.sh
+  # yarn
+  - npm i -g yarn
 jobs:
   include:
     - stage: pulumi-preview
