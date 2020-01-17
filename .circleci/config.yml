@@ -30,12 +30,12 @@ jobs:
           name: Mark scripts as executable
           command: chmod +x ./scripts/*.sh
 
-  pulumi-preview:
+  pulumi_preview:
     steps:
       run:
         name: Run pulumi preview
         command: ./scripts/pulumi-preview.sh
-  pulumi-up:
+  pulumi_up:
     steps:
       run:
         name: Run pulumi up
@@ -49,11 +49,11 @@ workflows:
   pulumi:
     jobs:
       - build
-      - pulumi-preview:
+      - pulumi_preview:
           requires:
             - build
         when: << pipeline.git.branch >> != "master"
-      - pulumi-up:
+      - pulumi_up:
           requires:
             - build
           when: << pipeline.git.branch >> == "master"
