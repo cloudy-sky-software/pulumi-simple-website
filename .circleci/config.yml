@@ -2,63 +2,59 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
+orbs:
+  pulumi: pulumi/pulumi@1.2.0
+
 jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:10.18-alpine
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
+  pulumi_preview:
     working_directory: ~/repo
+    docker:
+      - image: circleci/node:10
 
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+      - pulumi/login:
+          cloud-url: ${PULUMI_API}
 
       - run: yarn install
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+      - pulumi/preview:
+          stack: praneetloke/simple-website/dev
+
+  pulumi_up:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:10
+
+    steps:
+      - checkout
+
+      - pulumi/login:
+          cloud-url: ${PULUMI_API}
+
+      - run: yarn install
 
       - run:
-          name: Mark scripts as executable
-          command: chmod +x ./scripts/*.sh
-
-  pulumi-preview:
-    run:
-      name: Run pulumi preview
-      command: ./scripts/pulumi-preview.sh
-  pulumi-up:
-    run:
-      name: Run pulumi up
-      command: |
-        echo "I will run on master branch merges only!"
-        # Uncomment the following line to actually run pulumi up for your use.
-        # ./scripts/run-pulumi.sh
+          name: Run pulumi up
+          command: echo I will run on master branch merges only!
+      # Uncomment the following line to actually run pulumi up for your use.
+      # - pulumi/update:
+      #     stack: <stack_name>
 
 workflows:
-  version: 2
-  workflow:
+  version: 2.1
+  preview:
     jobs:
-      - build
-      - pulumi-preview:
-          requires:
-            - build
-          when: << pipeline.git.branch >> != "master"
-      - pulumi-up:
-          requires:
-            - build
-          when: << pipeline.git.branch >> == "master"
+      - pulumi_preview:
+          filters:
+            branches:
+              ignore:
+                - master
+
+      - pulumi_up:
+          filters:
+            branches:
+              only:
+                - master
