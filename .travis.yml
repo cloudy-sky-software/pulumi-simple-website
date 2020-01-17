@@ -5,6 +5,8 @@ branches:
   only:
   - master
 install:
+  # Install Node.js 10.16.3
+  - nvm install v10.16.3
   # Install Pulumi
   - curl -fsSL https://get.pulumi.com/ | bash
   - export PATH="$HOME/.pulumi/bin:$PATH"
