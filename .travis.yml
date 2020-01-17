@@ -1,8 +1,9 @@
 language: node_js
+os: linux
+dist: xenial
 branches:
   only:
   - master
-dist: xenial
 install:
   # Install Pulumi
   - curl -fsSL https://get.pulumi.com/ | bash
