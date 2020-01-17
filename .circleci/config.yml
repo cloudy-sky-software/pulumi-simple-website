@@ -18,7 +18,6 @@ jobs:
         command: |
           ls -lrt
           chmod +x ./scripts/*.sh
-          # pulumi
           curl -L https://get.pulumi.com/ | bash
           export PATH=$PATH:$HOME/.pulumi/bin
 
