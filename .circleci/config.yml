@@ -9,13 +9,6 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:10.18-alpine
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
     steps:
       - checkout
 
@@ -38,16 +31,18 @@ jobs:
           command: chmod +x ./scripts/*.sh
 
   pulumi-preview:
-    run:
-      name: Run pulumi preview
-      command: ./scripts/pulumi-preview.sh
+    steps:
+      run:
+        name: Run pulumi preview
+        command: ./scripts/pulumi-preview.sh
   pulumi-up:
-    run:
-      name: Run pulumi up
-      command: |
-        echo "I will run on master branch merges only!"
-        # Uncomment the following line to actually run pulumi up for your use.
-        # ./scripts/run-pulumi.sh
+    steps:
+      run:
+        name: Run pulumi up
+        command: |
+          echo "I will run on master branch merges only!"
+          # Uncomment the following line to actually run pulumi up for your use.
+          # ./scripts/run-pulumi.sh
 
 workflows:
   version: 2
