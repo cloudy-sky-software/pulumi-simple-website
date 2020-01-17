@@ -31,16 +31,18 @@ jobs:
           command: chmod +x ./scripts/*.sh
 
   pulumi_preview:
-    run:
-      name: Run pulumi preview
-      command: ./scripts/pulumi-preview.sh
+    steps:
+      - run:
+        name: Run pulumi preview
+        command: ./scripts/pulumi-preview.sh
   pulumi_up:
-    run:
-      name: Run pulumi up
-      command: |
-        echo "I will run on master branch merges only!"
-        # Uncomment the following line to actually run pulumi up for your use.
-        # ./scripts/run-pulumi.sh
+    steps:
+      - run:
+        name: Run pulumi up
+        command: |
+          echo "I will run on master branch merges only!"
+          # Uncomment the following line to actually run pulumi up for your use.
+          # ./scripts/run-pulumi.sh
 
 workflows:
   version: 2
