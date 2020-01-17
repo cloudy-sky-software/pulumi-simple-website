@@ -4,11 +4,17 @@ branches:
   - master
 dist: xenial
 install:
-    # Install Pulumi
-    - curl -fsSL https://get.pulumi.com/ | bash
-    - export PATH="$HOME/.pulumi/bin:$PATH"
+  # Install Pulumi
+  - curl -fsSL https://get.pulumi.com/ | bash
+  - export PATH="$HOME/.pulumi/bin:$PATH"
 before_script:
-    - chmod +x ./scripts/*.sh
-    - ./scripts/setup.sh
-script:
-    - ./scripts/pulumi-preview.sh
+  - chmod +x ./scripts/*.sh
+  - ./scripts/setup.sh
+jobs:
+  include:
+    - stage: pulumi-preview
+      script: ./scripts/pulumi-preview.sh
+      if: branch != master
+    - stage: pulumi-up
+      script: echo "I will run for master branches only!"
+      if: branch = master
