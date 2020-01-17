@@ -10,8 +10,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      # specify the version you desire here
-      - image: node:10.18-alpine
+      - image: circleci/node:10
 
     steps:
       - checkout
@@ -21,8 +20,7 @@ jobs:
   pulumi_preview:
     working_directory: ~/repo
     docker:
-      # specify the version you desire here
-      - image: node:10.18-alpine
+      - image: circleci/node:10
     steps:
       - pulumi/preview:
           stack: praneetloke/simple-website/dev
@@ -30,8 +28,7 @@ jobs:
   pulumi_up:
     working_directory: ~/repo
     docker:
-      # specify the version you desire here
-      - image: node:10.18-alpine
+      - image: circleci/node:10
     steps:
       - run:
           name: Run pulumi up
