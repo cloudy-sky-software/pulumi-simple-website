@@ -52,7 +52,7 @@ workflows:
       - pulumi_preview:
           requires:
             - build
-        when: << pipeline.git.branch >> != "master"
+          when: << pipeline.git.branch >> != "master"
       - pulumi_up:
           requires:
             - build
