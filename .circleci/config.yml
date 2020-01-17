@@ -28,7 +28,9 @@ jobs:
 
       - run:
           name: Mark scripts as executable
-          command: chmod +x ./scripts/*.sh
+          command: |
+            chmod +x ./scripts/*.sh
+            ./scripts/setup.sh
 
   pulumi_preview:
     docker:
@@ -37,7 +39,8 @@ jobs:
     steps:
       - run:
         name: Run pulumi preview
-        command: ./scripts/pulumi-preview.sh
+        command: |
+          ./scripts/pulumi-preview.sh
   pulumi_up:
     docker:
       # specify the version you desire here
