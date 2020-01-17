@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/repo
+    working_directory: ~/project
     docker:
       # specify the version you desire here
       - image: node:10.18-alpine
@@ -31,13 +31,11 @@ jobs:
           name: Mark scripts as executable
           command: |
             ls -lrt
-            ls -lrt ~/project
-            ls -lrt ~/pulumi-simple-website
             chmod +x ./scripts/*.sh
             ./scripts/setup.sh
 
   pulumi_preview:
-    working_directory: ~/repo
+    working_directory: ~/project
     docker:
       # specify the version you desire here
       - image: node:10.18-alpine
@@ -47,7 +45,7 @@ jobs:
         command: |
           ./scripts/pulumi-preview.sh
   pulumi_up:
-    working_directory: ~/repo
+    working_directory: ~/project
     docker:
       # specify the version you desire here
       - image: node:10.18-alpine
