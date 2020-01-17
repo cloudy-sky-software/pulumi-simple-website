@@ -13,6 +13,15 @@ jobs:
     steps:
       - checkout
 
+      - run:
+        name: Install Pulumi
+        command: |
+          ls -lrt
+          chmod +x ./scripts/*.sh
+          # pulumi
+          curl -L https://get.pulumi.com/ | bash
+          export PATH=$PATH:$HOME/.pulumi/bin
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -26,13 +35,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run:
-          name: Mark scripts as executable
-          command: |
-            ls -lrt
-            chmod +x ./scripts/*.sh
-            ./scripts/setup.sh
 
   pulumi_preview:
     working_directory: ~/project
