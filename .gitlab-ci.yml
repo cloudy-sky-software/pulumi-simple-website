@@ -1,0 +1,36 @@
+stages:
+  - infrastructure-update
+
+environment:
+  stage: infrastructure-update
+  script:
+    - export
+  only:
+    - merge_requests
+
+pulumi:
+  stage: infrastructure-update
+  before_script:
+    - chmod +x ./scripts/*.sh
+    - ./scripts/setup.sh
+  script:
+    - echo "I run for master branch builds only!"
+    # Uncomment the following line to actually run pulumi up.
+    # - ./scripts/run-pulumi.sh
+  artifacts:
+    paths:
+    - pulumi-log.txt
+    expire_in: 1 week
+  only:
+    refs:
+      - master
+
+pulumi-preview:
+  stage: infrastructure-update
+  before_script:
+    - chmod +x ./scripts/*.sh
+    - ./scripts/setup.sh
+  script:
+    - ./scripts/pulumi-preview.sh
+  only:
+    - merge_requests
