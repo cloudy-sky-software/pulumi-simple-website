@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/pulumi-simple-website
+    working_directory: ~/repo
     docker:
       # specify the version you desire here
       - image: node:10.18-alpine
@@ -34,7 +34,7 @@ jobs:
             ./scripts/setup.sh
 
   pulumi_preview:
-    working_directory: ~/pulumi-simple-website
+    working_directory: ~/repo
     docker:
       # specify the version you desire here
       - image: node:10.18-alpine
@@ -44,7 +44,7 @@ jobs:
         command: |
           ./scripts/pulumi-preview.sh
   pulumi_up:
-    working_directory: ~/pulumi-simple-website
+    working_directory: ~/repo
     docker:
       # specify the version you desire here
       - image: node:10.18-alpine
