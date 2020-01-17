@@ -1,0 +1,26 @@
+language: node_js
+os: linux
+dist: xenial
+branches:
+  only:
+  - master
+install:
+  # Install Node.js 10.16.3
+  - nvm install v10.16.3
+  # Install Pulumi
+  - curl -fsSL https://get.pulumi.com/ | bash
+  - export PATH="$HOME/.pulumi/bin:$PATH"
+before_script:
+  - chmod +x ./scripts/*.sh
+  # yarn
+  - npm i -g yarn
+jobs:
+  include:
+    - stage: pulumi-preview
+      script: ./scripts/pulumi-preview.sh
+      if: type = pull_request
+    - stage: pulumi-up
+      script: echo "I will run for master branches only!"
+      # Uncomment the below line to actually deploy the website app.
+      #script: ./scripts/run-pulumi.sh
+      if: type = push
