@@ -54,20 +54,11 @@ workflows:
   workflow:
     jobs:
       - build
-<<<<<<< HEAD
       - pulumi-preview:
-          requires:
-            - build
-          when: << pipeline.git.branch >> != "master"
+        requires:
+          - build
+        when: << pipeline.git.branch >> != "master"
       - pulumi-up:
-          requires:
-            - build
-          when: << pipeline.git.branch >> == "master"
-=======
-      - pulumi:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
->>>>>>> ec0d089... Add CircleCI configuration
+        requires:
+          - build
+        when: << pipeline.git.branch >> == "master"
