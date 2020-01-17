@@ -52,6 +52,7 @@ workflows:
             branches:
               ignore:
                 - master
+
       - pulumi_up:
           requires:
             - build
