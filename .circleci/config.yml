@@ -7,22 +7,19 @@ orbs:
   pulumi: pulumi/pulumi@1.2.0
 
 jobs:
-  build:
+  pulumi_preview:
     working_directory: ~/repo
     docker:
       - image: circleci/node:10
 
     steps:
       - checkout
+
       - pulumi/login:
           cloud-url: ${PULUMI_API}
+
       - run: yarn install
 
-  pulumi_preview:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/node:10
-    steps:
       - pulumi/preview:
           stack: praneetloke/simple-website/dev
 
@@ -30,7 +27,15 @@ jobs:
     working_directory: ~/repo
     docker:
       - image: circleci/node:10
+
     steps:
+      - checkout
+
+      - pulumi/login:
+          cloud-url: ${PULUMI_API}
+
+      - run: yarn install
+
       - run:
           name: Run pulumi up
           command: echo I will run on master branch merges only!
@@ -42,18 +47,13 @@ workflows:
   version: 2.1
   preview:
     jobs:
-      - build
       - pulumi_preview:
-          requires:
-            - build
           filters:
             branches:
               ignore:
                 - master
 
       - pulumi_up:
-          requires:
-            - build
           filters:
             branches:
               only:
