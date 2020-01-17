@@ -3,9 +3,11 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+orbs:
+  pulumi: pulumi/pulumi@1.0.0
 jobs:
   build:
-    working_directory: ~/project
+    working_directory: ~/repo
     docker:
       # specify the version you desire here
       - image: node:10.18-alpine
@@ -13,13 +15,7 @@ jobs:
     steps:
       - checkout
 
-      - run:
-        name: Install Pulumi
-        command: |
-          ls -lrt
-          chmod +x ./scripts/*.sh
-          curl -L https://get.pulumi.com/ | bash
-          export PATH=$PATH:$HOME/.pulumi/bin
+      - pulumi/login
 
       # Download and cache dependencies
       - restore_cache:
@@ -36,17 +32,15 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
   pulumi_preview:
-    working_directory: ~/project
+    working_directory: ~/repo
     docker:
       # specify the version you desire here
       - image: node:10.18-alpine
     steps:
-      - run:
-        name: Run pulumi preview
-        command: |
-          ./scripts/pulumi-preview.sh
+      - pulumi/preview:
+        stack: praneetloke/simple-website/dev
   pulumi_up:
-    working_directory: ~/project
+    working_directory: ~/repo
     docker:
       # specify the version you desire here
       - image: node:10.18-alpine
@@ -55,8 +49,9 @@ jobs:
         name: Run pulumi up
         command: |
           echo "I will run on master branch merges only!"
-          # Uncomment the following line to actually run pulumi up for your use.
-          # ./scripts/run-pulumi.sh
+      # Uncomment the following line to actually run pulumi up for your use.
+      # - pulumi/update:
+      #   stack: <stack_name>
 
 workflows:
   version: 2
