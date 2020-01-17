@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.18-alpine
+      - image: node:10.18-alpine
 
     steps:
       - checkout
@@ -33,7 +33,7 @@ jobs:
   pulumi_preview:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.18-alpine
+      - image: node:10.18-alpine
     steps:
       - run:
         name: Run pulumi preview
@@ -41,7 +41,7 @@ jobs:
   pulumi_up:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.18-alpine
+      - image: node:10.18-alpine
     steps:
       - run:
         name: Run pulumi up
