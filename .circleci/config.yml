@@ -15,6 +15,7 @@ jobs:
     steps:
       - checkout
       - pulumi/login
+          cloud-url: ${PULUMI_API}
       - run: yarn install
 
   pulumi_preview:
