@@ -25,7 +25,7 @@ jobs:
       - image: node:10.18-alpine
     steps:
       - pulumi/preview:
-        stack: praneetloke/simple-website/dev
+          stack: praneetloke/simple-website/dev
 
   pulumi_up:
     working_directory: ~/repo
@@ -38,7 +38,7 @@ jobs:
           command: echo I will run on master branch merges only!
       # Uncomment the following line to actually run pulumi up for your use.
       # - pulumi/update:
-      #   stack: <stack_name>
+      #     stack: <stack_name>
 
 workflows:
   version: 2.1
