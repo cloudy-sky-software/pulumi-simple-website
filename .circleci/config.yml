@@ -2,15 +2,12 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2.1
-executors:
-  node:
-    docker:
-      - image: circleci/node:10.18-alpine
-
+version: 2
 jobs:
   build:
-    executor: node
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.18-alpine
 
     steps:
       - checkout
@@ -34,15 +31,17 @@ jobs:
           command: chmod +x ./scripts/*.sh
 
   pulumi_preview:
-    executor: node
-
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.18-alpine
     steps:
       - run:
         name: Run pulumi preview
         command: ./scripts/pulumi-preview.sh
   pulumi_up:
-    executor: node
-
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.18-alpine
     steps:
       - run:
         name: Run pulumi up
@@ -52,7 +51,7 @@ jobs:
           # ./scripts/run-pulumi.sh
 
 workflows:
-  version: 2.1
+  version: 2
   preview:
     jobs:
       - build
