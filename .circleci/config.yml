@@ -46,14 +46,17 @@ jobs:
 
 workflows:
   version: 2
-  pulumi:
+  preview:
+    when: << pipeline.git.branch >> != "master"
     jobs:
       - build
       - pulumi_preview:
           requires:
             - build
-          when: << pipeline.git.branch >> != "master"
+  update:
+    when: << pipeline.git.branch >> == "master"
+    jobs:
+      - build
       - pulumi_up:
           requires:
             - build
-          when: << pipeline.git.branch >> == "master"
