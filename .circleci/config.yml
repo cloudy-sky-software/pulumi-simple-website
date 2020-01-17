@@ -35,8 +35,7 @@ jobs:
     steps:
       - run:
         name: Run pulumi up
-        command: |
-          echo "I will run on master branch merges only!"
+        command: echo I will run on master branch merges only!
       # Uncomment the following line to actually run pulumi up for your use.
       # - pulumi/update:
       #   stack: <stack_name>
