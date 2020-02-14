@@ -92,5 +92,5 @@ In each of the configuration files, the setup is the following:
 * Run yarn install
 * Run `pulumi preview` for pull request builds
 * Run `pulumi up` for master branch merge builds
-  * This is currently commented out in each of the configurations and instead a message will be printed.
+  * This is currently commented out in each of the CI configurations, instead, a message will be printed.
   * Simply remove the `echo` message and instead uncomment the line that runs the `pulumi up` command.
