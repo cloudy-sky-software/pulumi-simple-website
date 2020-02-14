@@ -83,6 +83,8 @@ This project contains sample configuration for the following CI systems:
 * GitLab
 * Travis CI
 * CircleCI (uses the official [Pulumi Orb](https://circleci.com/orbs/registry/orb/pulumi/pulumi))
+* Azure Pipelines - _Coming Soon!_
+* GitHub Actions - _Coming Soon!_
 
 In each of the configuration files, the setup is the following:
 * Install Pulumi CLI
