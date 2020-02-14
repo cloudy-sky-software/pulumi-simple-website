@@ -76,6 +76,7 @@ with `***`.
     ![Hello S3 example](images/part2-website.png)
 
 1.  To clean up resources, run `pulumi destroy` and answer the confirmation question at the prompt.
+1.  You may also remove the stack if you no longer need it, by running `pulumi stack rm` and following the on-screen prompts.
 
 ## CI configuration
 
