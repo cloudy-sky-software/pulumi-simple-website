@@ -4,6 +4,13 @@ const aws = require("@pulumi/aws");
 const pulumi = require("@pulumi/pulumi");
 const mime = require("mime");
 
+const requiredEnvs = ["PULUMI_ACCESS_TOKEN", "AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"];
+for (const env of requiredEnvs) {
+  if (!process.env[env]) {
+    throw new Error(`Please set the value for ${env} var in the .env file.`);
+  }
+}
+
 // Create a bucket and expose a website index document
 let siteBucket = new aws.s3.Bucket("s3-website-bucket", {
     website: {
