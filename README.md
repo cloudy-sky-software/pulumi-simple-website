@@ -1,3 +1,5 @@
+[![Run on Repl.it](https://repl.it/badge/github/praneetloke/pulumi-simple-website)](https://repl.it/github/praneetloke/pulumi-simple-website)
+
 # Static Website Hosted on AWS S3
 
 A static website that uses [S3's website support](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html).
