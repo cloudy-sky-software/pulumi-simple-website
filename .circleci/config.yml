@@ -1,60 +1,13 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+# Use a package of configuration called an orb.
 orbs:
-  pulumi: pulumi/pulumi@2.0.0
-
-jobs:
-  pulumi_preview:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/node:12
-
-    steps:
-      - checkout
-
-      - pulumi/login:
-          cloud-url: ${PULUMI_API}
-
-      - run: yarn install
-
-      - pulumi/preview:
-          stack: praneetloke/simple-website/dev
-
-  pulumi_up:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/node:10
-
-    steps:
-      - checkout
-
-      - pulumi/login:
-          cloud-url: ${PULUMI_API}
-
-      - run: yarn install
-
-      - run:
-          name: Run pulumi up
-          command: echo I will run on master branch merges only!
-      # Uncomment the following line to actually run pulumi up for your use.
-      # - pulumi/update:
-      #     stack: <stack_name>
-
+  # Declare a dependency on the welcome-orb
+  welcome: circleci/welcome-orb@0.4.1
+# Orchestrate or schedule a set of jobs
 workflows:
-  version: 2.1
-  preview:
+  # Name the workflow "welcome"
+  welcome:
+    # Run the welcome/run job in its own container
     jobs:
-      - pulumi_preview:
-          filters:
-            branches:
-              ignore:
-                - master
-
-      - pulumi_up:
-          filters:
-            branches:
-              only:
-                - master
+      - welcome/run
